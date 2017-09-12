@@ -13,10 +13,12 @@ pipelines:
 
   bake:
     image: docker:17.03.0-ce
+    env:
+      GCR_PROJECT: estafette.secret(3tHZ9bT_wEz5K8Cx.kZyD5m8L-7-zpvzZ4bkeyUdKLiGfRx_ttoY=)
     commands:
     - cp Dockerfile ./publish
     - cp /etc/ssl/certs/ca-certificates.crt ./publish
-    - docker build -t gcr.io/${ESTAFETTE_GCR_PROJECT}/${ESTAFETTE_LABEL_APP}:${ESTAFETTE_BUILD_VERSION} ./publish
+    - docker build -t gcr.io/${GCR_PROJECT}/${ESTAFETTE_LABEL_APP}:${ESTAFETTE_BUILD_VERSION} ./publish
 
   # push-to-gcr-io:
   #   image: docker:17.03.0-ce
